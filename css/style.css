@@ -1,0 +1,482 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Helvetica, sans-serif;
+}
+
+/*PALETA DE COLORES QUE UTILIZO*/
+:root{
+    --primary-yellow: #ffd60a;
+    --secondary-yellow: #ffba0ad9;
+    --dark-color: #131920;
+    --light-color: #fff;
+}
+
+a{color: var(--primary-yellow);}
+
+/*Establece el ancho de desplazamiento de la barra en 15px*/
+::-webkit-scrollbar{
+    width: 15px;
+}
+
+/*Cambia el color de la barra de desplazamiento*/
+::-webkit-scrollbar-thumb{
+    background-color: var(--primary-yellow);
+}
+/*CAMBIA EL COLOR DE LA PISTA DE BARRA Y AUMENTA EN 50px */
+::-webkit-scrollbar-track{
+    background-color: var(--dark-color);
+    width: 50px;
+}
+
+html{
+    font-size: 70%;
+    overflow-x: hidden; /*Oculta el contenido que sobresalga del contenido en*/
+}
+
+body{
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.bg-animation{
+    position: fixed; /*Mantiene el elemento en la posicion relativa a la ventana del navegador*/
+    top: 0; /*Se coloca el elemento en la parte superior*/
+    left: 0; /*Se coloca a la parte izquierda*/
+    width: 100%; /*Ocupa todo el ancho de su contenido*/
+    height: 100%; /*Ocupa todo el alto de su contenido*/
+    z-index: -1; /*Se colocara detras de otros elementos*/
+    background: radial-gradient(circle at 10% 20%, rgba(255, 214, 10, 0.05) 0%, transparent),
+    radial-gradient(circle at 90% 80%, rgba(255, 214, 10, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 50% 50%, rgba(255, 214, 10, 0.05) 0%, transparent 30%);
+    /*Agrega un radiante gradial que se extiende desde el centro del elemento hacia afuera. El elemento tiene 3 circulos concentricos con diferentes opacidades*/
+    animation: backgroundMove 20s ease-in-out infinite alternate; /*Establece una animacion para el fondo del elemento que se alterna de forma infinita entre 2 estados.*/
+}
+
+/*keyframes define una animacion*/
+@keyframes backgroundMove{
+    0%{
+        background-position: 0% 0%; /*Significa que el fondo se va a colocar en la esquina superior izquierda del elemento.*/
+    }
+    100%{
+        background-position: 100% 100%; /*Significa que el fondo se va a colocar en la esquina inferior derecha del elemento.*/
+    }
+
+    /*Hace que el fondo del elemento se mueva desde la esquina superior izquierda hasta la esquina inferior derecha en un tiempo definido.*/
+}
+
+
+nav{
+    position: fixed;
+    width: 100%;
+    padding: 1.5rem;
+    background: rgba(20, 26, 34, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 2px solid var(--primary-yellow);
+}
+
+.nav-content{
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-yellow);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    position: relative;
+}
+
+.logo::after{
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-yellow);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.logo:hover{
+    cursor: pointer;
+}
+
+.logo:hover::after{
+    cursor: pointer;
+    transform: scaleX(1);
+}
+
+.nav-links{
+    display: flex;
+    gap: 3rem;
+}
+
+.nav-links a{
+    color: var(--light-color);
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-links a::before{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-yellow);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.nav-links a:hover::before{
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+
+.home{
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    padding: 60px 9% 0;
+    color: var(--light-color);
+}
+
+.home-info h1{
+    font-size: 55px;
+}
+
+.home-info h2{
+    display: inline-block;
+    font-size: 32px;
+    margin-top: -10px;
+}
+
+
+/*Crea una animacion que hace que el texto en span se oculte y muestre*/
+.home-info h2 span{
+    position: relative; /* Se posiciona de forma relativa a su posicion normal*/
+    display: inline-block; /*Convierte h2 y span en bloque de linea*/
+    color: transparent; /*Hace que el texto sea transparente y no se vea*/
+    -webkit-text-stroke: 1px var(--primary-yellow);
+    /*Hace que el texto se muestre en un contorno amarillo*/
+    animation: display-text 16s linear infinite;
+    /*Crea una animacion que se ejecuta durante 16 segundos con una velocidad lineal y se repite infinitamente*/
+    animation-delay: calc(-4s * var(--i)); /*Establece un retraso de la animacion que se calcula utilizando la variable, por lo que cada variable tendrá un retraso distinto*/
+}
+
+
+/*Animacion que oculta el elemento */
+@keyframes display-text{
+    25%, /*Oculta un cuarto total del tiempo*/
+    100% /*Oculta al final de la animacion*/{
+        display: none;
+    }
+}
+
+.home-info h2 span::before {
+    position: absolute;
+    width: 0;
+    border-right: 2px solid var(--primary-yellow);
+    color: var(--primary-yellow);
+    white-space: nowrap; /*Contrae los espacios en blanco*/
+    overflow: hidden;
+}
+
+
+.home-info p{
+    font-size: 16px;
+    margin: 10px 0 25px;
+}
+
+.home-info .btn-sci{
+    display: flex;
+    align-items: center;
+}
+
+.btn{
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 30px;
+    background: var(--dark-color);
+    border: 2px solid var(--secondary-yellow);
+    border-radius: 40px;
+    box-shadow: 0 0 10px var(--secondary-yellow);
+    font-size: 16px;
+    color: var(--light-color);
+    font-weight: 600;
+}
+
+.btn:hover{
+    background: transparent;
+    color: var(--light-color);
+    box-shadow: none;
+    transition: 1s ease-in-out;
+}
+
+.home-info .btn-sci .sci{
+    margin-left: 20px;
+
+}
+
+.home-info .btn-sci .sci a{
+    display: inline-flex;
+    padding: 8px;
+    border: 2px solid var(--secondary-yellow);
+    border-radius: 50%;
+    font-size: 20px;
+    color: var(--primary-yellow);
+    margin: 0 8px;
+    transition: .5s;
+}
+
+.home-info .btn-sci .sci a:hover{
+    box-shadow: 0 0 10px var(--secondary-yellow);
+}
+
+
+.home-img .img-box{
+    position: relative;
+    width: 32vw;
+    height: 32vw;
+    border-radius: 50%;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.home-img .img-box::before,
+.home-img .img-box::after{
+    content: ""; /*cadena vacia necesaria para que se muestren los elementos*/
+    position: absolute; /* Se posiciona relativo a su elemento padre*/
+    width: 500px;
+    height: 500px;
+    background: conic-gradient(transparent, transparent, transparent, var(--primary-yellow));/*Crea un gradiante conico que va desde transparente a amarillo*/
+    transform: rotate(0deg);/* No hará ninguna rotacion*/
+    animation: rotate-border 10s linear infinite; /* hará que rote 10s de forma linea y infinitamente*/
+    
+}
+
+/*ANIMACION IMG*/
+@keyframes rotate-border{
+    100%{
+        transform: rotate(360deg); /*Rotarà 360grados alrededor de su eje central*/
+    }
+}
+
+.home-img .img-box .img-item{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--dark-color);
+    border-radius: 50%;
+    border: .1px solid var(--dark-color);
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.home-img .img-box .img-item img{
+    position:absolute;
+    top: 30px;
+    display: block;
+    width: 85%;
+    object-fit: cover;
+    mix-blend-mode: lighten;
+}
+
+.home-info h1, h2{
+    color: var(--primary-yellow);
+}
+
+.home-info p{
+    color: var(--light-color);
+}
+
+/*-----SECTION SERVICES----*/
+
+.services{
+    color: rgb(189, 129, 56);
+}
+.services h2{
+    margin-bottom: 5rem;
+    color: rgb(214, 126, 19);
+}
+.services-conteiner{
+    display: grid;
+    grid-template-columns: repeat(2,1fr); /*Crea 2 columnas con 1fraccion del ancho del contenedor*/
+    align-items: center;
+    gap: 2.5rem; /*Establece el espacio entre los elementos de la cuadricula*/
+}
+.service-box, .card{
+    margin: 1.5rem;
+    height: 300px;
+    border-radius: 3rem;
+    border: 5px solid transparent;
+    box-shadow: 0 0 10px#ffd60a;
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
+}
+.card:hover, .service-box:hover{
+    border: 5px solid var(--secondary-yellow);
+    box-shadow: 0 0 10px var(--primary-yellow);
+    transform: scale(1.03);
+}
+.service-box .service-info{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    max-height: 200px;
+    justify-content: left;
+    align-items: baseline;
+    padding: 5rem 5rem;
+}
+.service-info h4{
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 2;
+    color: var(--primary-yellow);
+}
+.service-info p{
+    font-size: 1.6rem;
+    font-weight: 600;
+    max-height: 100px;
+    line-height: 1.7;
+    margin: auto;
+    color: var(--light-color)
+}
+
+
+/*PROYECTOS*/
+
+.cards-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 250px auto;
+    height: 90vh;
+}
+
+.card{
+    flex: 1 1 calc(33.33% - 2rem); /* Ajusta las cartas en columnas*/
+    max-width: calc(33.33% - 2rem); /* Proporciona màximo ancho para mantener la uniformidad*/
+    height: 50vh;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 3rem;
+    border: 5px solid transparent;
+    box-shadow: 0 0 10px#ffd60a;
+    flex-direction: column;
+    align-content: space-evenly;
+    justify-content: center;
+}
+.card p{
+    display: none;
+}
+
+@media (max-width:768px){
+    .card{
+        flex: 1 1 calc(50% - 1rem); /*Forma 2 columnas en pantallas medianas*/
+        max-width: calc(50% - 1rem);
+    }
+}
+
+.card h3{
+    margin: 0 0 0.5rem;
+    color: var(--primary-yellow);
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    
+}
+
+.card p {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+}
+#portfolio-img{
+    background-image: url(/img/test01.png);
+    width: 300px;
+    padding: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(5px);
+}
+
+/*FOOTER*/
+
+
+footer{
+    background-color: var(--dark-color);
+}
+.footer-conteiner{
+    width: 100%;
+    padding: 70px 30px 20px;
+}
+
+.sci{
+    display: flex;
+    justify-content: center;
+}
+.sci a{
+    padding: 10px;
+    margin: 10px;
+}
+.sci a i{
+    font-size: 3rem;
+}
+
+.footer-nav{
+    margin: 10px 0;
+}
+.footer-nav ul{
+    display: flex;
+    justify-content: center;
+}
+.footer-nav ul li a{
+    margin: 20px;
+    text-decoration: none;
+    font-size: 1.3em;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+.footer-nav ul li a:hover{
+    opacity: 1;
+}
+.footer-bottom{
+    padding: 20px;
+    text-align: center;
+}
+
+.designer{
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin: 0px 5px;
+}
+
